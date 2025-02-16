@@ -1,0 +1,48 @@
+version: '3.8'
+
+networks:
+  ecopower-network:
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
+
+services:
+  mysql-container:
+    container_name: ecopower-mysql
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: P@ss123
+      MYSQL_USER: khaled
+      MYSQL_PASSWORD: khaled
+      MYSQL_DATABASE: ecopower
+    networks:
+      ecopower-network:
+        ipv4_address: 172.19.0.9
+    volumes:
+      - ecopower-db:/var/lib/mysql
+    healthcheck:   # -- Add health check --
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_HTTP_PORTS=80
+    depends_on:
+      mysql-container:
+        condition: service_healthy  # -- Wait until MySQL is ready --
+    networks:
+      ecopower-network:
+        ipv4_address: 172.19.0.10
+
+volumes:
+  ecopower-db:
