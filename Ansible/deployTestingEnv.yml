@@ -1,0 +1,32 @@
+---
+- name: Docker Operations
+  hosts: Testing
+  remote_user: ubuntu
+  become: true
+  vars:
+    docker_image: "{{ docker_image }}"
+    docker_tag: "{{ docker_tag }}"
+    
+  tasks:
+
+    - name: Pull an image
+      community.docker.docker_image:
+        name: "{{ docker_image }}:{{ docker_tag }}"
+        source: pull 
+
+    - name: Stop any docker container for EcoPowerHub-Backend
+      community.docker.docker_container:
+        name: eco-back
+        state: absent
+        force_kill: true
+
+    - name: Run Docker container
+      community.docker.docker_container:
+        name: eco-back
+        image: "{{ docker_image }}:{{ docker_tag }}"
+        state: started
+        env:
+          ASPNETCORE_HTTP_PORTS: "80"
+        ports:
+          - "8080:80"
+        restart_policy: always
