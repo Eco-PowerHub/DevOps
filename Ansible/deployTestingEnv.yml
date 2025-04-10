@@ -29,4 +29,5 @@
           ASPNETCORE_HTTP_PORTS: "80"
         ports:
           - "8080:80"
+          - "8443:443"
         restart_policy: always
