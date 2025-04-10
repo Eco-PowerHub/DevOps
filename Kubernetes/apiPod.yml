@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: eco-backend
+  labels:
+    app: eco-backend
+spec:
+  volumes:
+    - name: eco-volume
+      # emptyDir: {}
+      hostPath:
+        path: /mnt/MyData/Courses/Projects/GrdPrj/back-volume
+        type: DirectoryOrCreate
+  containers:
+    - name: eco-backend
+      image: khaledmahmoud7/eco-back:22
+      imagePullPolicy: Never
+      env:
+        - name: ASPNETCORE_HTTP_PORTS
+          value: "80"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      volumeMounts:
+        - name: eco-volume
+          mountPath: /tmp/ecoVolume
+      ports:
+        - containerPort: 80
+      # livenessProbe:
+      #   httpGet:
+      #     path: /api
+      #     port: 80
+      #   initialDelaySeconds: 30
+      #   periodSeconds: 10
+
+
+
+
+
