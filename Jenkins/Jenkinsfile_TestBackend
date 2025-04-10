@@ -1,3 +1,8 @@
+def COLOR_MAP = [
+    'SUCCESS': 'good',
+    'FAILURE': 'danger',
+]
+
 pipeline {
 
     agent any
@@ -8,6 +13,11 @@ pipeline {
         IMAGE_NAME = 'khaledmahmoud7/eco-back'
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        DOTNET_CLI_HOME = "${env.WORKSPACE}"
+        SONAR_SCANNER_HOME = tool 'SonarQube-Scanner'
+        SONAR_SERVER = 'SonarQube'
+        PROJECT_KEY = 'ecopower-back'
+        PROJECT_NAME = 'EcoPowerHub-Backend'
     }
 
     stages {
@@ -15,6 +25,12 @@ pipeline {
             steps {
                 git branch: "${BRANCH}", url: "${GIT_REPO}"
             }    
+        }
+
+        stage("Copy EmailService") {
+            steps {
+                sh 'cp /var/jenkins_home/ecofiles/EmailTemplateService.cs /var/jenkins_home/workspace/Eco-PowerHub/Backend-Dev/Repositories/Services/EmailTemplateService.cs'
+            }
         }
 
         stage("Restore Dependencies") {
@@ -41,6 +57,23 @@ pipeline {
             }
         }
 
+        // stage('Code Analysis') {
+        //     steps {
+        //         // Run SonarQube analysis without quality gate check
+        //         withSonarQubeEnv(credentialsId: 'SonarQube', installationName: "${SONAR_SERVER}") {
+        //             sh """
+        //                 ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
+        //                 -Dsonar.projectKey=${PROJECT_KEY} \
+        //                 -Dsonar.projectName="${PROJECT_NAME}" \
+        //                 -Dsonar.sources=. \
+        //                 -Dsonar.cs.opencover.reportsPaths=**/coverage.opencover.xml \
+        //                 -Dsonar.cs.vstest.reportsPaths=**/TestResults/*.trx
+        //             """
+        //         }
+        //         // No quality gate check
+        //     }
+        // }
+
         stage('Dockerizing .NET') {
             steps {
                 sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
@@ -62,13 +95,11 @@ pipeline {
     }
 
     post {
-        success {
-            echo 'Build and Tests completed successfully!'
-        }
-        failure {
-            echo 'Build or Tests failed. Check the logs for details.'
-        }
         always {
+            echo 'Slack Notification'
+            slackSend channel: '#cicd',
+                color: COLOR_MAP[currentBuild.currentResult],
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}"
             sh 'docker logout'
         }
     }
