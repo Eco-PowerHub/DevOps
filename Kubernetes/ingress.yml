@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eco-ingress
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - www.ecopowerhub.com
+        - api.ecopowerhub.com
+  rules:
+  - host: www.ecopowerhub.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-service
+            port:
+              number: 80  
+  - host: api.ecopowerhub.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: eco-backend-service
+            port:
+              number: 80  
