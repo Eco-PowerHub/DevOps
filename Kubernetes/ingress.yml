@@ -8,6 +8,7 @@ spec:
     - hosts:
         - www.ecopowerhub.com
         - api.ecopowerhub.com
+      secretName: ecopower-tls-secret
   rules:
   - host: www.ecopowerhub.com
     http:
