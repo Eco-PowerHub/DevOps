@@ -1,0 +1,11 @@
+######         APIS          ######
+private apiUrl = '/api';
+private  Register=`${this.apiUrl}/Account/Register`;
+private  verifyotp=`${this.apiUrl}/Account/verify-otp`;
+private loginUrl=`${this.apiUrl}/Account/Login`;
+private forgetpass=`${this.apiUrl}/Account/ForgetPassword`;
+
+######      Services communication inside the Cluster      ######
+1. Frontend's Pods Requests data
+2. NGINX Recieve the Requests that specify "/api"
+3. NGINX Redirect the requests to Backend Service at the FQDN "http://eco-backend-service.default.svc.cluster.local/api/" inside the cluster
