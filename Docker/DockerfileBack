@@ -17,7 +17,7 @@ COPY . .
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
 RUN dotnet build -c ${BUILD_CONFIGURATION} -o /app/build
-RUN dotnet ef database update
+# RUN dotnet ef database update
 
 #================================
 # Stage Three --> Publish
