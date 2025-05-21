@@ -2,25 +2,25 @@
 variable "aws_region" {
   description = "AWS region to deploy resources"
   type        = string
-  default     = "us-east-1"
+  default     = "me-south-1"
 }
 
 variable "environment" {
   description = "Environment name (e.g., dev, staging, prod)"
   type        = string
-  default     = "dev"
+  default     = "staging"
 }
 
 variable "project_name" {
   description = "Name of the project for resource naming and tagging"
   type        = string
-  default     = "board-game-cicd"
+  default     = "eco-power-cicd"
 }
 
 variable "key_name" {
   description = "Name of the SSH key pair for EC2 instances"
   type        = string
-  default     = "board-game-key"  
+  default     = "eco-power-key"  
 }
 
 variable "monitoring_instance_type" {
@@ -86,14 +86,14 @@ variable "private_subnet_cidrs" {
 variable "availability_zones" {
   description = "List of availability zones"
   type        = list(string)
-  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  default     = ["me-south-1a", "me-south-1b", "me-south-1c"]
 }
 
 # EKS Variables
 variable "cluster_name" {
   description = "Name of the EKS cluster"
   type        = string
-  default     = "board-game-cicd-cluster"
+  default     = "eco-power-cicd-cluster"
 }
 
 variable "cluster_version" {
