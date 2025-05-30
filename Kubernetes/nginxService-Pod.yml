@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: angular-nginx-eco
-      image: eco-frontend:latest
+      image: khaledmahmoud7/eco-front:latest
       imagePullPolicy: Never
       ports:
         - containerPort: 80

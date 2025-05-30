@@ -13,7 +13,7 @@ spec:
         type: DirectoryOrCreate
   containers:
     - name: eco-backend
-      image: eco-backend:latest
+      image: khaledmahmoud7/eco-back:latest
       imagePullPolicy: Never
       env:
         - name: ASPNETCORE_HTTP_PORTS
