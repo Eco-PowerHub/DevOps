@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eco-backend-deployment
+  labels:
+    app: eco-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: eco-backend
+  template:
+    metadata:
+      name: eco-backend
+      labels:
+        app: eco-backend
+    spec:
+      volumes:
+        - name: eco-volume
+          # emptyDir: {}
+          hostPath:
+            path: /mnt/MyData/Courses/Projects/GrdPrj/back-volume
+            type: DirectoryOrCreate
+      containers:
+        - name: eco-backend
+          image: khaledmahmoud7/eco-back:44
+          imagePullPolicy: Never
+          env:
+            - name: ASPNETCORE_HTTP_PORTS
+              value: "80"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: eco-volume
+              mountPath: /tmp/ecoVolume
+          ports:
+            - containerPort: 80
+          # livenessProbe:
+          #   httpGet:
+          #     path: /api
+          #     port: 80
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eco-backend-service
+spec:
+  selector:
+    app: eco-backend
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: ClusterIP
+      # nodePort: 30090
+      # type: NodePort
