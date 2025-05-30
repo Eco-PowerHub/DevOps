@@ -19,7 +19,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: nginx-service
+            name: eco-nginx-service
             port:
               number: 80  
       # - path: /api
@@ -32,7 +32,7 @@ spec:
   - host: api.ecopowerhub.com
     http:
       paths:
-      - path: /
+      - path: /api
         pathType: Prefix
         backend:
           service:
