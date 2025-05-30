@@ -7,5 +7,5 @@ private forgetpass=`${this.apiUrl}/Account/ForgetPassword`;
 
 ######      Services communication inside the Cluster      ######
 1. Frontend's Pods Requests data
-2. NGINX Recieve the Requests that specify "/api"
-3. NGINX Redirect the requests to Backend Service at the FQDN "http://eco-backend-service.default.svc.cluster.local/api/" inside the cluster
+2. ingress Recieve the Requests that specify "https://api.ecopowerhub.com"
+3. ingress Redirect the requests to Backend Service at the FQDN "https://api.ecopowerhub.com/api/" inside the cluster
