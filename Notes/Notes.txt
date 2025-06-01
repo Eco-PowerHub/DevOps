@@ -1,4 +1,5 @@
 ######         APIS          ######
+
 private apiUrl = '/api';
 private  Register=`${this.apiUrl}/Account/Register`;
 private  verifyotp=`${this.apiUrl}/Account/verify-otp`;
@@ -6,6 +7,10 @@ private loginUrl=`${this.apiUrl}/Account/Login`;
 private forgetpass=`${this.apiUrl}/Account/ForgetPassword`;
 
 ######      Services communication inside the Cluster      ######
+
 1. Frontend's Pods Requests data
 2. ingress Recieve the Requests that specify "https://api.ecopowerhub.com"
 3. ingress Redirect the requests to Backend Service at the FQDN "https://api.ecopowerhub.com/api/" inside the cluster
+
+-------- Solve the problem of communication between Backend service & Frontend service inside k8s cluster --------
+- Must accept the self-signed SSL certifcate's risk of continuing the browsing before anything "Just in Staging.Env as Kind Cluster locally, not AWS EKS"
