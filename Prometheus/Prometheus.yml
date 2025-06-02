@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs: 
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - jon_name: 'Testing Environment'
+    static_configs:
+      - targets: ['157.175.182.159:9100']
