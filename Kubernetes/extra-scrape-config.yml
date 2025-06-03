@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-extra-scrape-config
+  namespace: default
+data:
+  extra-scrape-configs.yaml: |
+    - job_name: "Backend APIs Kubernetes Service"
+      static_configs:
+        - targets:
+            - "eco-backend-service.default.svc.cluster.local:80"
