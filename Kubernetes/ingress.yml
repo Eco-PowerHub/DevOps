@@ -3,7 +3,10 @@ kind: Ingress
 metadata:
   name: eco-ingress
   annotations:
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"  # Force SSL redirect
+    prometheus.io/scrape: "true"      # Enable Prometheus scraping
+    prometheus.io/port: "PORT"        # Replace with actual port
+    prometheus.io/path: "/metrics"    # Path to scrape metrics 
 spec:
   ingressClassName: nginx
   tls:
@@ -41,9 +44,9 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: prometheus-server
+            name: prometheus-kube-prometheus-prometheus
             port:
-              number: 80
+              number: 9090
   - host: grafana.ecopowerhub.com
     http:
       paths:
