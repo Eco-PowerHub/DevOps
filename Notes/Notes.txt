@@ -14,3 +14,9 @@ private forgetpass=`${this.apiUrl}/Account/ForgetPassword`;
 
 -------- Solve the problem of communication between Backend service & Frontend service inside k8s cluster --------
 - Must accept the self-signed SSL certifcate's risk of continuing the browsing before anything "Just in Staging.Env as Kind Cluster locally, not AWS EKS"
+
+######      Update ConfigMaps for prometheus.yml inside kubernetes cluster      ######
+
+1. Show the content of ConfigMap:   kubectl get configmap prometheus-server -o yaml
+2. Edit the content of ConfigMap:   kubectl get configmap prometheus-server -o yaml > prometheus-config.yaml
+3. Easy Way to update the scrapeConfig of prometheus without editing on ConfigMaps:     helm upgrade prometheus prometheus-community/prometheus -f prometheus-values.yaml
