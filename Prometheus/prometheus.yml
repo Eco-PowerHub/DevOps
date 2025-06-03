@@ -13,3 +13,13 @@ scrape_configs:
   - job_name: 'postgres-rds'
     static_configs:
     - targets: ['host.docker.internal:9187']
+
+  # Local Container for test
+  - job_name: 'Local Container'
+    static_configs:
+    - targets: ['172.17.0.2']
+
+  - job_name: '.NET Api Test-Env'
+    static_configs:
+    - targets: ['157.175.182.159:8080']
+
