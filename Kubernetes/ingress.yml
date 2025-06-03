@@ -10,6 +10,8 @@ spec:
     - hosts:
         - www.ecopowerhub.com
         - api.ecopowerhub.com
+        - promethues.ecopowerhub.com
+        - grafana.ecopowerhub.com
       secretName: ecopower-tls-secret
   rules:
   - host: www.ecopowerhub.com
@@ -22,20 +24,33 @@ spec:
             name: eco-nginx-service
             port:
               number: 80  
-      # - path: /api
-      #   pathType: Prefix
-      #   backend:
-      #     service:
-      #       name: eco-backend-service
-      #       port:
-      #         number: 80
   - host: api.ecopowerhub.com
     http:
       paths:
-      - path: /api
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: eco-backend-service
             port:
               number: 80  
+  - host: promethues.ecopowerhub.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-server
+            port:
+              number: 80
+  - host: grafana.ecopowerhub.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana
+            port:
+              number: 80
