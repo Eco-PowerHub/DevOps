@@ -23,7 +23,7 @@ spec:
             type: DirectoryOrCreate
       containers:
         - name: eco-backend
-          image: khaledmahmoud7/eco-back:44
+          image: khaledmahmoud7/eco-back:47
           imagePullPolicy: Never
           env:
             - name: ASPNETCORE_HTTP_PORTS
