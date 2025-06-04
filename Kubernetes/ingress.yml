@@ -13,7 +13,7 @@ spec:
     - hosts:
         - www.ecopowerhub.com
         - api.ecopowerhub.com
-        - promethues.ecopowerhub.com
+        - prometheus.ecopowerhub.com
         - grafana.ecopowerhub.com
       secretName: ecopower-tls-secret
   rules:
@@ -37,7 +37,7 @@ spec:
             name: eco-backend-service
             port:
               number: 80  
-  - host: promethues.ecopowerhub.com
+  - host: prometheus.ecopowerhub.com
     http:
       paths:
       - path: /
