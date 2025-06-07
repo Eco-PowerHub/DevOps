@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: eco-front
-          image: khaledmahmoud7/eco-front:14
+          image: khaledmahmoud7/eco-front:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 80
