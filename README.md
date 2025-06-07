@@ -140,10 +140,6 @@ Each environment is configured through Terraform variables and Kubernetes namesp
 4. Push to the branch
 5. Create a Pull Request
 
-## License
-
-[Your License Here]
-
 ## Contact
 
 khhaledd.77@gmail.com
