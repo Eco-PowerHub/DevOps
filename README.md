@@ -4,6 +4,8 @@ A complete DevOps infrastructure setup for the EcoPowerHub application, implemen
 
 ## Project Overview
 
+![CI/CD Pipelines](./images/EcoPipelines.png)
+
 This project implements a modern DevOps infrastructure for EcoPowerHub, including:
 
 - CI/CD pipelines with Jenkins
@@ -57,13 +59,13 @@ This project implements a modern DevOps infrastructure for EcoPowerHub, includin
 
 ```
 .
-├── Ansible/                # Ansible playbooks and inventory
+├── Ansible/               # Ansible playbooks and inventory
 ├── Docker/                # Dockerfile and compose files
 ├── Jenkins/               # Jenkins pipeline definitions
 ├── Kubernetes/            # K8s manifests
 ├── Nginx/                 # Nginx configuration
 ├── Prometheus/            # Monitoring configuration
-└── Terraform/            # Infrastructure as Code
+└── Terraform/             # Infrastructure as Code
 ```
 
 ## Prerequisites
