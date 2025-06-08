@@ -1,4 +1,4 @@
-# EcoPowerHub DevOps Infrastructure
+# Eco Power Hub DevOps Infrastructure
 
 A complete DevOps infrastructure setup for the EcoPowerHub application, implementing CI/CD pipelines, container orchestration, monitoring, and infrastructure as code.
 
